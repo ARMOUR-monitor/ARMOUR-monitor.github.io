@@ -6,7 +6,7 @@ on:
 
 # 🔐 Required permissions for deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site
+      - name: Build siteg
         env:
           BASE_PATH: ''
         run: |

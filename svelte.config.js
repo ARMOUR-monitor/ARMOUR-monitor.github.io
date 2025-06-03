@@ -9,10 +9,8 @@ export default {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: null,
-			precompress: false,
-			strict: true
+			fallback: 'index.html',
 		}),
-		paths: { base: dev ? '' : '' }
+		paths: { base: '' }
 	}
 };
