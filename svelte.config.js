@@ -13,6 +13,6 @@ export default {
 			precompress: false,
 			strict: true
 		}),
-		paths: { base: dev ? '' : '/' }
+		paths: { base: dev ? '' : '' }
 	}
 };
