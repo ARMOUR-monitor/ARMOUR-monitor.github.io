@@ -16,6 +16,82 @@ For now, we just provide sample data and demonstrate its visualization below. Th
 - `static/` - Static assets (datasets, images, logos)
 - `images/` - Project images and demo screenshots
 
+## Data
+
+The sensor data are located in the `static/`:
+- `OnePlus-12-Armour-Sensor_data.csv`: The raw sensor data collected from the OnePlus Nord N200 5G device (Android 12).
+- `S9-10-Armour-sensor_data.csv`: The raw sensor data collected from the Samsung Galaxy S9 (Android 10).
+- Corresponding JSON files for metadata for the detailed visualization.
+
+### Data Field Explanation
+
+![Demo](./images/data_demo.jpg)
+
+For each CSV file, every row represents a consistent sensor request for a specific sensor in a specific region:
+- **Category**: The application category
+- **CategoryIndex**: Index number for the category
+- **VendorIdentifier**: Unique identifier for the app
+- **Sensor**: Type of sensor (e.g., Accelerometer, Gyroscope, Magnetometer)
+- **Region**: The context or stage of data collection (e.g., FG=Foreground, BG=Background, INSTL=Installation, STOP=Force Stopping, RM=Uninstallization)
+- **PatternIndex**: Index for the detected behavior or pattern in one region
+- **Frequency**: Sampling frequency of the sensor data
+- **Start**: Start timestamp of a specific frequency
+- **End**: End timestamp of a specific frequency
+- **Duration**: Durartion of a specific frequency
+
+
+```json
+{
+    "name": "Big Keyboard: Easy Launcher",
+    "vendor_identifier": "com.bigkeyboardeasylauncher.biggerkeybuttonandroidlauncherapp",
+    "category": "Personalization",
+    "category_index": 33,
+    "analysis_info": [
+        {
+            "stage_name": "sample_guard_start_time",
+            "stage_abbreviation": "INSTL",
+            "stage_bias": 2.5,
+            "stage_time": 0.0
+        },
+        ...
+    ],
+    "sensor_data": [
+        {
+            "sensor_name": "Accelerometer",
+            "freq_data": [
+                {
+                    "freq": 5,
+                    "time": 0.2
+                },
+                {
+                    "freq": 5,
+                    "time": 4.8950000000000005
+                },
+                ...
+            ]
+        },
+        ...
+    ]
+}
+```
+
+For each JSON file, each object represents all sensor access information for a single app during the testing phase:
+- **name**: Name of the app
+- **vendor_identifier**: Unique identifier for the app
+- **category**: Category of the app
+- **category_index**: Index of the App in the Category
+- **analysis_info**: An array of objects containing analysis stages with:
+  - **stage_name**: Name of the stage, e.g., sample_guard_start_time, app_open_time, app_background_time, app_stop_time, app_uninstall_time
+  - **stage_abbreviation**: Abbreviation for the stage, e.g., Installization (INSTL), Foreground (FG), Background (BG), Force Stopping (STOP), Uninstallization (RM)
+  - **stage_bias**: Bias value for the stage name in visualization
+  - **stage_time**: Related Start time of the stage in seconds
+- **sensor_data**: An array of objects for each sensor with:
+  - **sensor_name**: Name of the sensor (e.g., Accelerometer, Gyroscope, Magnetometer)
+  - **freq_data**: An array of frequency data objects with:
+    - **freq**: Frequency of the sensor data
+    - **time**: Relative Time at which the frequency was recorded
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -81,27 +157,7 @@ Provides a comprehensive view of detailed sensor usage for a single app, grouped
 
 These visualization tools not only improve data readability but also help users quickly identify anomalies and understand behavioral patterns of sensor usage, providing strong support for privacy protection and security analysis.
 
-## Data
 
-The sensor data are located in the `static/`:
-- `OnePlus-12-Armour-Sensor_data.csv`
-- `S9-10-Armour-sensor_data.csv`
-- Corresponding JSON files for metadata
-
-### Data Field Explanation
-
-![Demo](./images/data_demo.jpg)
-
-- **Category**: The application category (e.g., Android-Wear)
-- **CategoryIndex**: Index number for the category
-- **VendorIdentifier**: Unique identifier for the app
-- **Sensor**: Type of sensor (e.g., Accelerometer, Gyroscope, Magnetometer)
-- **Region**: The context or stage of data collection (e.g., FG=Foreground, BG=Background, INSTL=Installation, STOP=Force Stopping, RM=Uninstallization)
-- **PatternIndex**: Index for the detected behavior or pattern in one region
-- **Frequency**: Sampling frequency of the sensor data
-- **Start**: Start timestamp of a specific frequency
-- **End**: End timestamp of a specific frequency
-- **Duration**: Durartion of a specific frequency
 
 ## Adding New Data
 
